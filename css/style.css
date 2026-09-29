@@ -1,17 +1,66 @@
 /* ==========================================================================
-   株式会社サンプル - たたき台用スタイル
-   ※レイアウト確認用の最低限のスタイルです。デザイン確定後に差し替えてください。
+   株式会社サンプル - たたき台用スタイル（青基調）
+   ※配色は仮です。ブランドカラー確定後は変数の値を差し替えてください。
    ========================================================================== */
 
 /* ---------- 変数 ---------- */
 :root {
-  --color-text: #333;
+  /* 基本色 */
+  --color-primary: #1d5fbf;        /* メインの青：ボタン・リンク・見出しの線 */
+  --color-primary-dark: #154a96;   /* 濃い青：ホバー・ヒーロー背景の奥側 */
+  --color-primary-deep: #0e2f63;   /* 最も濃い青：フッター背景 */
+  --color-primary-light: #e8f0fb;  /* 淡い青：交互セクションの背景 */
+  --color-on-primary: #fff;        /* 青の上に置く文字色 */
+
+  /* 文字・背景・線 */
+  --color-text: #1f2a3a;
+  --color-text-muted: #5a6b82;
   --color-bg: #fff;
-  --color-bg-alt: #f5f5f5;
-  --color-border: #ddd;
-  --color-accent: #555;
+  --color-bg-alt: var(--color-primary-light);
+  --color-surface: #fff;           /* カード・表などの面 */
+  --color-border: #d3deec;
+
+  /* 仮置き（画像・地図） */
+  --color-placeholder: #7d93b3;
+  --color-placeholder-bg: #dbe6f5;
+
   --container-width: 1080px;
   --header-height: 64px;
+}
+
+/* ---------- ダークモード ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary: #6ea8ff;
+    --color-primary-dark: #1b3f78;
+    --color-primary-deep: #0a1830;
+    --color-primary-light: #13233d;
+    --color-on-primary: #0b1526;
+    --color-text: #e3eaf5;
+    --color-text-muted: #9fb0c8;
+    --color-bg: #0e1726;
+    --color-surface: #16223a;
+    --color-border: #2a3b58;
+    --color-placeholder: #7f95b8;
+    --color-placeholder-bg: #1f3050;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #6ea8ff;
+  --color-primary-dark: #1b3f78;
+  --color-primary-deep: #0a1830;
+  --color-primary-light: #13233d;
+  --color-on-primary: #0b1526;
+  --color-text: #e3eaf5;
+  --color-text-muted: #9fb0c8;
+  --color-bg: #0e1726;
+  --color-surface: #16223a;
+  --color-border: #2a3b58;
+  --color-placeholder: #7f95b8;
+  --color-placeholder-bg: #1f3050;
+  color-scheme: dark;
 }
 
 /* ---------- リセット・ベース ---------- */
@@ -35,7 +84,13 @@ img {
 }
 
 a {
-  color: inherit;
+  color: var(--color-primary);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 ul,
@@ -55,9 +110,10 @@ ol {
 /* ---------- ヘッダー ---------- */
 .site-header {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 100;
   background: var(--color-bg);
+  border-top: 4px solid var(--color-primary);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -71,6 +127,7 @@ ol {
 .logo {
   font-weight: bold;
   font-size: 1.25rem;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -80,12 +137,21 @@ ol {
 }
 
 .global-nav a {
+  padding-block: 4px;
+  color: var(--color-text);
   text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.global-nav a:hover {
+  color: var(--color-primary);
 }
 
 .global-nav a[aria-current="page"] {
   font-weight: bold;
-  text-decoration: underline;
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
 }
 
 /* ハンバーガーボタン（スマホ時のみ表示） */
@@ -103,30 +169,45 @@ ol {
   display: block;
   height: 2px;
   margin: 5px 0;
-  background: var(--color-text);
+  background: var(--color-primary);
 }
 
 /* ---------- メインビジュアル ---------- */
 .hero {
   padding: 120px 0;
   text-align: center;
-  background: var(--color-bg-alt);
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-deep));
 }
 
 .hero-title {
   margin: 0 0 16px;
   font-size: 2rem;
+  text-wrap: balance;
 }
 
 .hero-lead {
   margin: 0 0 32px;
+  opacity: 0.9;
+}
+
+.hero .btn {
+  color: var(--color-primary-deep);
+  background: #fff;
+  border-color: #fff;
+}
+
+.hero .btn:hover {
+  color: #fff;
+  background: transparent;
 }
 
 /* ---------- 下層ページのタイトル ---------- */
 .page-header {
   padding: 64px 0;
   text-align: center;
-  background: var(--color-bg-alt);
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-deep));
 }
 
 .page-title {
@@ -136,7 +217,10 @@ ol {
 
 .page-lead {
   margin: 0;
-  color: var(--color-accent);
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
 /* ---------- セクション共通 ---------- */
@@ -149,21 +233,51 @@ ol {
 }
 
 .section-title {
-  margin: 0 0 24px;
+  margin: 0 0 32px;
+  padding-bottom: 12px;
   font-size: 1.5rem;
+  text-wrap: balance;
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 64px;
+  height: 3px;
+  background: var(--color-primary);
 }
 
 /* ---------- ボタン・リンク ---------- */
 .btn {
   display: inline-block;
   padding: 12px 32px;
-  border: 1px solid var(--color-text);
+  font-weight: bold;
+  color: var(--color-on-primary);
   text-decoration: none;
+  background: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  color: var(--color-primary);
+  background: transparent;
 }
 
 .link-more {
   display: inline-block;
   margin-top: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link-more:hover {
+  text-decoration: underline;
 }
 
 .link-more::after {
@@ -179,13 +293,19 @@ ol {
 
 .card {
   padding: 24px;
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-radius: 8px;
 }
 
 .card-title {
   margin: 0 0 8px;
   font-size: 1.125rem;
+  color: var(--color-primary);
+}
+
+.card p {
+  margin: 0;
 }
 
 /* ---------- お知らせ ---------- */
@@ -196,13 +316,20 @@ ol {
   border-bottom: 1px solid var(--color-border);
 }
 
+.news-list time {
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
 /* ---------- 画像などの仮置き ---------- */
 .placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
-  background: #e0e0e0;
+  color: var(--color-placeholder);
+  background: var(--color-placeholder-bg);
+  border-radius: 8px;
 }
 
 /* ---------- 代表メッセージ ---------- */
@@ -211,12 +338,17 @@ ol {
   gap: 32px;
 }
 
+.message-body {
+  min-width: 0;
+}
+
 .message-photo {
   flex: 0 0 240px;
   height: 300px;
 }
 
 .message-sign {
+  font-weight: bold;
   text-align: right;
 }
 
@@ -228,6 +360,10 @@ ol {
   border-bottom: 1px solid var(--color-border);
 }
 
+.service-body {
+  min-width: 0;
+}
+
 .service-image {
   flex: 0 0 320px;
   height: 220px;
@@ -236,11 +372,16 @@ ol {
 .service-title {
   margin: 0 0 16px;
   font-size: 1.375rem;
+  color: var(--color-primary);
 }
 
 .service-features {
   padding-left: 1.5em;
   list-style: disc;
+}
+
+.service-features li::marker {
+  color: var(--color-primary);
 }
 
 .flow-list {
@@ -250,14 +391,20 @@ ol {
 
 .flow-list li {
   padding: 16px 24px;
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.flow-list strong {
+  color: var(--color-primary);
 }
 
 /* ---------- 会社概要テーブル ---------- */
 .info-table {
   width: 100%;
   border-collapse: collapse;
+  background: var(--color-surface);
 }
 
 .info-table th,
@@ -271,6 +418,8 @@ ol {
 .info-table th {
   width: 25%;
   white-space: nowrap;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .map {
@@ -282,7 +431,8 @@ ol {
 .site-footer {
   padding: 40px 0 24px;
   text-align: center;
-  border-top: 1px solid var(--color-border);
+  color: #fff;
+  background: var(--color-primary-deep);
 }
 
 .footer-nav {
@@ -294,11 +444,26 @@ ol {
 }
 
 .footer-nav a {
+  color: #fff;
   text-decoration: none;
+  opacity: 0.85;
+}
+
+.footer-nav a:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
 .copyright {
   margin: 0;
+  opacity: 0.7;
+}
+
+/* ---------- 動きを減らす設定への配慮 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
 
 /* ---------- レスポンシブ（スマホ） ---------- */
@@ -329,6 +494,11 @@ ol {
   .global-nav a {
     display: block;
     padding: 12px 16px;
+    border-bottom: none;
+  }
+
+  .global-nav a[aria-current="page"] {
+    background: var(--color-primary-light);
   }
 
   .hero {
