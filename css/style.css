@@ -1,0 +1,366 @@
+/* ==========================================================================
+   株式会社サンプル - たたき台用スタイル
+   ※レイアウト確認用の最低限のスタイルです。デザイン確定後に差し替えてください。
+   ========================================================================== */
+
+/* ---------- 変数 ---------- */
+:root {
+  --color-text: #333;
+  --color-bg: #fff;
+  --color-bg-alt: #f5f5f5;
+  --color-border: #ddd;
+  --color-accent: #555;
+  --container-width: 1080px;
+  --header-height: 64px;
+}
+
+/* ---------- リセット・ベース ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+  line-height: 1.8;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.global-nav ul {
+  display: flex;
+  gap: 24px;
+}
+
+.global-nav a {
+  text-decoration: none;
+}
+
+.global-nav a[aria-current="page"] {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* ハンバーガーボタン（スマホ時のみ表示） */
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  background: var(--color-text);
+}
+
+/* ---------- メインビジュアル ---------- */
+.hero {
+  padding: 120px 0;
+  text-align: center;
+  background: var(--color-bg-alt);
+}
+
+.hero-title {
+  margin: 0 0 16px;
+  font-size: 2rem;
+}
+
+.hero-lead {
+  margin: 0 0 32px;
+}
+
+/* ---------- 下層ページのタイトル ---------- */
+.page-header {
+  padding: 64px 0;
+  text-align: center;
+  background: var(--color-bg-alt);
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.page-lead {
+  margin: 0;
+  color: var(--color-accent);
+}
+
+/* ---------- セクション共通 ---------- */
+.section {
+  padding: 64px 0;
+}
+
+.section-alt {
+  background: var(--color-bg-alt);
+}
+
+.section-title {
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+}
+
+/* ---------- ボタン・リンク ---------- */
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border: 1px solid var(--color-text);
+  text-decoration: none;
+}
+
+.link-more {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.link-more::after {
+  content: " →";
+}
+
+/* ---------- カード ---------- */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  padding: 24px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.card-title {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+}
+
+/* ---------- お知らせ ---------- */
+.news-list li {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- 画像などの仮置き ---------- */
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  background: #e0e0e0;
+}
+
+/* ---------- 代表メッセージ ---------- */
+.message {
+  display: flex;
+  gap: 32px;
+}
+
+.message-photo {
+  flex: 0 0 240px;
+  height: 300px;
+}
+
+.message-sign {
+  text-align: right;
+}
+
+/* ---------- サービス詳細 ---------- */
+.service {
+  display: flex;
+  gap: 32px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.service-image {
+  flex: 0 0 320px;
+  height: 220px;
+}
+
+.service-title {
+  margin: 0 0 16px;
+  font-size: 1.375rem;
+}
+
+.service-features {
+  padding-left: 1.5em;
+  list-style: disc;
+}
+
+.flow-list {
+  display: grid;
+  gap: 16px;
+}
+
+.flow-list li {
+  padding: 16px 24px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+/* ---------- 会社概要テーブル ---------- */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-table th,
+.info-table td {
+  padding: 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.info-table th {
+  width: 25%;
+  white-space: nowrap;
+}
+
+.map {
+  height: 360px;
+  margin-bottom: 16px;
+}
+
+/* ---------- フッター ---------- */
+.site-footer {
+  padding: 40px 0 24px;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  margin-bottom: 16px;
+}
+
+.footer-nav a {
+  text-decoration: none;
+}
+
+.copyright {
+  margin: 0;
+}
+
+/* ---------- レスポンシブ（スマホ） ---------- */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .global-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .global-nav.is-open {
+    display: block;
+  }
+
+  .global-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .global-nav a {
+    display: block;
+    padding: 12px 16px;
+  }
+
+  .hero {
+    padding: 80px 0;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .card-list {
+    grid-template-columns: 1fr;
+  }
+
+  .message,
+  .service {
+    flex-direction: column;
+  }
+
+  .message-photo,
+  .service-image {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .news-list li {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-table th {
+    width: 35%;
+    white-space: normal;
+  }
+}
