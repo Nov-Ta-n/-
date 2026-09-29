@@ -20,6 +20,8 @@
 ├── about.html
 ├── services.html
 ├── company.html
+├── images/
+│   └── profile.jpg # 代表者プロフィール画像
 ├── css/
 │   └── style.css   # 共通スタイル（仮）
 └── js/
